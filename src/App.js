@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import "./App.css";
@@ -14,12 +19,12 @@ const firebaseConfig = {
   measurementId: "G-JM8T9PFNWT",
 };
 
-function NotFound(analytics) {
+function NotFound({ analytics }) {
+  const location = useLocation();
+
   useEffect(() => {
-    if (analytics) {
-      logEvent(analytics, "page_viewed");
-    }
-  }, [analytics]);
+    logEvent(analytics, "page_viewed", { path: location.pathname });
+  }, [analytics, location.pathname]);
 
   return (
     <div className="App">
