@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -21,6 +21,7 @@ function NotFound(analytics) {
     }
   }, [analytics]);
 
+  return (
     <div className="App">
       <header className="App-header">
         <h1>404</h1>
